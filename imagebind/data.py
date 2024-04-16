@@ -13,12 +13,12 @@ import torch.nn as nn
 import torchaudio
 from PIL import Image
 from pytorchvideo import transforms as pv_transforms
-from pytorchvideo.data.clip_sampling import ConstantClipsPerVideoSampler
+from pytorchvideo.data.clip_sampling import ConstantClipsPerVideoSampler, UniformClipSampler
 from pytorchvideo.data.encoded_video import EncodedVideo
 from torchvision import transforms
 from torchvision.transforms._transforms_video import NormalizeVideo
 
-from imagebind.models.multimodal_preprocessors import SimpleTokenizer
+from lib.imagebind.imagebind.models.multimodal_preprocessors import SimpleTokenizer
 
 DEFAULT_AUDIO_FRAME_SHIFT_MS = 10  # in milliseconds
 
@@ -119,7 +119,7 @@ def load_and_transform_audio_data(
     num_mel_bins=128,
     target_length=204,
     sample_rate=16000,
-    clip_duration=2,
+    clip_duration=1,
     clips_per_video=3,
     mean=-4.268,
     std=9.138,
@@ -131,6 +131,10 @@ def load_and_transform_audio_data(
     clip_sampler = ConstantClipsPerVideoSampler(
         clip_duration=clip_duration, clips_per_video=clips_per_video
     )
+
+    # clip_sampler = UniformClipSampler(
+    #     clip_duration=clip_duration
+    # )
 
     for audio_path in audio_paths:
         waveform, sr = torchaudio.load(audio_path)
