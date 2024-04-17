@@ -287,7 +287,7 @@ class SpatialCrop(nn.Module):
 def load_and_transform_video_data(
     video_paths,
     device,
-    clip_duration=2,
+    clip_duration=1,
     clips_per_video=5,
     sample_rate=16000,
 ):
