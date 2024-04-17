@@ -132,10 +132,6 @@ def load_and_transform_audio_data(
         clip_duration=clip_duration, clips_per_video=clips_per_video
     )
 
-    # clip_sampler = UniformClipSampler(
-    #     clip_duration=clip_duration
-    # )
-
     for audio_path in audio_paths:
         waveform, sr = torchaudio.load(audio_path)
         if sample_rate != sr:
