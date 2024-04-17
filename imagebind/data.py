@@ -308,7 +308,7 @@ def load_and_transform_video_data(
     clip_sampler = ConstantClipsPerVideoSampler(
         clip_duration=clip_duration, clips_per_video=clips_per_video
     )
-    frame_sampler = pv_transforms.UniformTemporalSubsample(num_samples=clip_duration)
+    frame_sampler = pv_transforms.UniformTemporalSubsample(num_samples=2*clip_duration)
 
     for video_path in video_paths:
         video = EncodedVideo.from_path(
